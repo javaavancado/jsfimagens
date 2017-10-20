@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Olá Aluno</title>
+
+</h:head>
+
+<h:body>
+
+	<h:form id="formAluno" enctype="multipart/form-data">
+
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Foto" for="arquivo" />
+			<h:inputFile id="arquivo" required="true"
+				value="#{managedBeanAluno.arquivo}"
+				requiredMessage="Informe o arquivo" />
+
+			<h:outputLabel value="Nome:" for="nome" />
+			<h:inputText value="#{managedBeanAluno.aluno.nome}" id="nome" />
+
+			<h:outputLabel value="Idade:" for="idade" />
+			<h:inputText value="#{managedBeanAluno.aluno.idade}" id="idade" />
+
+			<h:outputLabel value="Cpf:" for="cpf" />
+			<h:inputText value="#{managedBeanAluno.aluno.cpf}" id="cpf" />
+
+			<h:commandButton action="#{managedBeanAluno.salvar()}" value="Salvar">
+				<f:ajax execute="@form" render="@all" />
+			</h:commandButton>
+		</h:panelGrid>
+
+		<h:graphicImage value="#{managedBeanAluno.aluno.fotoIconBase64}" />
+		
+		<h:commandLink immediate="true" rendered="#{managedBeanAluno.aluno.id != null}"
+			actionListener="#{managedBeanAluno.download}" value="Download">
+			<f:param name="fileDownloadId" value="#{managedBeanAluno.aluno.id}" />
+		</h:commandLink>
+
+	</h:form>
+
+</h:body>
+
+</html>
+
